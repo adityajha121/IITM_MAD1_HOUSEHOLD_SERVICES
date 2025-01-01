@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - {{ customer.User_fname }} {{ customer.User_lname }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="navbar-brand">A to Z Services</div>
+        <div class="nav-item active">
+            <a href="{{ url_for('index') }}">Home</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('View_profile') }}">View Profile</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('Services') }}">View Services</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('notifications') }}">Notifications</a>
+        </div>
+
+        <div class="nav-item">
+            <a href="{{ url_for('booked_services') }}">Booked Services</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('customer_summary') }}">Services Summary</a>
+        </div>
+        <div class="nav-item">
+            <a href="{{ url_for('logout') }}">Log Out</a>
+        </div>
+        
+        
+        
+
+        
+        
+        
+
+    </nav>
+    
+    
+    
+    
+
+    <div class="container mt-4">
+        <h2>View or Edit your Profile </h2>
+
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-success mt-3">
+                {{ messages[0][1] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        
+        <form method="POST">
+            <div class="mb-3">
+                <label for="User_fname" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="User_fname" name="User_fname" value="{{ customer.User_fname }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="User_lname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="User_lname" name="User_lname" value="{{ customer.User_lname }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="User_email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="User_email" name="User_email" value="{{ customer.User_email }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="User_mobile" class="form-label">Mobile</label>
+                <input type="text" class="form-control" id="User_mobile" name="User_mobile" value="{{ customer.User_mobile }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" name="address" value="{{ customer.address }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="User_pincode" class="form-label">Pincode</label>
+                <input type="text" class="form-control" id="User_pincode" name="User_pincode" value="{{ customer.User_pincode }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="User_state" class="form-label">State</label>
+                <input type="text" class="form-control" id="User_state" name="User_state" value="{{ customer.User_state }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="User_city" class="form-label">City</label>
+                <input type="text" class="form-control" id="User_city" name="User_city" value="{{ customer.User_city }}" required>
+            </div>
+
+            <button type="submit" class="btn btn-success">Save Changes</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f2f5;
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        background-color: #4a90e2;
+        color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-right: 2rem;
+    }
+
+    .nav-item {
+        margin-right: 1.5rem;
+    }
+
+    .nav-item a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .nav-item:hover a {
+        color: navy;
+        text-shadow: 0 0 8px #1e90ff;
+    }
+
+    /* Service Card Styling */
+    .services-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px auto;
+        max-width: 1200px;
+        gap: 20px;
+    }
+
+    .service-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-card h3 {
+        font-size: 1.5rem;
+        color: #4a90e2;
+        margin-bottom: 15px;
+    }
+
+    .service-card p {
+        font-size: 1rem;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    .service-card a {
+        text-decoration: none;
+        color: #4a90e2;
+    }
+
+    .service-card a:hover {
+        text-decoration: underline;
+    }
+
+    .btn-book {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+    }
+
+    .btn-book:hover {
+        background-color: #0066cc;
+    }
+</style>

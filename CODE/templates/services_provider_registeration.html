@@ -1,0 +1,95 @@
+{% extends 'main.html' %}
+{% block title %}
+<title>Register As Service Provider</title>
+{% endblock title %}
+
+{% block body %}
+
+<body>
+
+<div class="container mt-5 p-4 bg-white rounded shadow">
+<h2 class="text-center mb-4">Register As Service Provider</h2>
+    <form action="{{ url_for('services_provider_registeration') }}" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" name="Serviceprovider_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="Provider_email_id" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="password" name="serviceprovider_password" required>
+        </div>
+<div class="mb-3">
+    <label for="description" class="form-label">Your description:</label>
+<textarea class="form-control" id="description" name="provider_description" rows="4" required></textarea>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        </div>
+        <div class="mb-3">
+            <label for="Address" class="form-label">Address:</label>
+            <textarea class="form-control" id="address" name="provider_address" rows="4" required></textarea>
+        </div>
+        <div class="col-md-4">
+        <label for="pincode" class="form-label">Pincode</label>
+            <input type="text" class="form-control form-control-sm" id="pincode" placeholder="Pincode" name="provider_pincode" required>
+        </div>
+        <div class="mb-3">
+            <label for="service_type" class="form-label">Service Type:</label>
+            <select class="form-select" id="service_type" name="service_type" required>
+                <option value="">Select Service Type</option>
+                <option value="plumbing">Plumbing</option>
+                <option value="painting">Painting</option>
+            <option value="pest_control">Pest Control</option>
+                <option value="home_appliance_repair">Home Appliance Repairing</option>
+                <option value="house_cleaning">House Cleaning</option>
+                <option value="beautician">Beautician</option>
+            <option value="house_decor">House Decor</option>
+                <option value="house_shifting">House Shifting</option>
+                <option value="electrician">Electrician</option>
+                <option value="cleaning">Cleaning</option>
+                <option value="carpentry">Carpentry</option>
+                <option value="gardening">Gardening</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="mb-3">
+        <label for="experience" class="form-label">Experience (in years):</label>
+        <input type="number" class="form-control" id="experience" name="experience" required>
+        </div>
+        <div class="mb-3">
+            <label for="experience" class="form-label">Base Price for your service per hour (in INR):</label>
+            <input type="number" class="form-control" id="experience" name="base_price" required>
+            </div>
+        <div class="col-md-8">
+            <label for="mobile" class="form-label">Mobile Number</label>
+        <input type="text" class="form-control form-control-sm" id="mobile" placeholder="Mobile Number" name="phone_number" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_proof" class="form-label">Upload ID Proof:</label>
+            <input type="file" class="form-control" id="id_proof" name="provider_id" accept=".jpg,.jpeg,.png,.pdf" required>
+    <div class="form-text">Acceptable ID proofs: Aadhar Card, PAN Card, Driving License Only.</div>
+        </div>
+    
+    <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <div class="text-center mt-3">
+        <p>Already registered? <a href="/login">Login here</a>.</p>
+    </div>
+    <footer class="text-center mt-4">
+        <p class="text-muted">@ 2024 A to Z Household. All Rights Reserved.</p>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock body %}
+

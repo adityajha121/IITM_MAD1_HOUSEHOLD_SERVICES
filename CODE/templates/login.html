@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body style="padding-top: 70px;">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  {% for category, message in messages %}
+  <div class="alert alert-{{category}} alert-dismissible fade show flash-message" role="alert">
+    <strong>Message</strong> {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var alerts = document.querySelectorAll('.alert');
+      alerts.forEach(function (alert) {
+        setTimeout(function () {
+          alert.classList.remove('show');
+          alert.classList.add('fade');
+        }, 5000);
+      });
+    });
+  </script>
+
+  <nav class="navbar fixed-top">
+  <div class="navbar-brand">A to Z Services</div>
+  <div class="nav-item active">
+   <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+  </div>
+  <div class="nav-item">
+  <a href="{{ url_for('register') }}">Register</a>
+  </div>
+  <div class="nav-item">
+      <a href="{{ url_for('login') }}">Login</a>
+    </div>
+    <div class="nav-item">
+      <a href="about us">About Us</a>
+    </div>
+    
+    
+    
+    
+  </nav>
+
+  
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+  <div class="card p-4 shadow" style="width: 400px;">
+    <h1 class="text-center">Login</h1>
+  <form method="POST" action="/login" class="my-5">
+    <div class="form-group">
+      <label for="email">Email address</label>
+    <input type="email" class="form-control rounded-pill border-0 shadow-sm" id="email" placeholder="Enter email" name="customer_email_id" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control rounded-pill border-0 shadow-sm" id="password" placeholder="Password" name="customer_password" required>
+    </div>
+      <div class="forgot-password">
+        <a href="/forgot_password">Forgot Password?</a>
+      </div>
+      <div class="create-account">
+          Don't have an account? <a href="/register">Create one</a>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary rounded-pill shadow-sm">Log in</button>
+        </div>
+        <div class="d-flex justify-content-center">
+          <a href="service_provider_login">Login as a service professional?</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  
+  <style>
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-image: url('static/household1.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .flash-message {
+      position: relative;
+      margin-top: 70px; 
+      z-index: 1050;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #4a90e2;
+      color: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .navbar.fixed-top {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+     .nav-item {
+      margin-right: 2rem;
+      color: white;
+    }
+    .nav-item a {
+      color: white;
+    }
+    .nav-item a:hover {
+      color: navy;
+      text-shadow: 0 0 8px #1e90ff;
+    }
+    .search-container {
+      display: flex;
+      margin-left: auto;
+    }
+    .search-button {
+      background-color: black;
+      color: #4a90e2;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px 0 0 5px;
+    }
+    .search-button:hover {
+      background-color: rgb(13, 151, 38);
+    }
+    .search-input {
+      border: none;
+      padding: 5px 10px;
+      font-size: 1rem;
+      border-radius: 0 5px 5px 0;
+      width: 200px;
+    }
+
+    /* Card and Form */
+    .card {
+      background-color: #f8f9fa;
+      border-radius: 15px;
+    }
+    .forgot-password, .create-account {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 15px;
+      color: #555;
+    }
+    .form-control {
+      height: 45px;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      display: flex;
+      justify-content: center;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+
+    .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-right: 2rem;
+    color: black;
+}
+  </style>
+</body>
+
+</html>
+
+
+

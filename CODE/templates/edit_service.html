@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Service</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Edit Service: {{ service.service_name }}</h2>
+        <form action="{{ url_for('edit_service', service_id=service.id) }}" method="POST">
+            <div class="mb-3">
+                <label for="service_name" class="form-label">Service Name</label>
+                <input type="text" class="form-control" id="service_name" name="service_name" value="{{ service.service_name }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="service_description" class="form-label">Description</label>
+                <textarea class="form-control" id="service_description" name="service_description" rows="3" required>{{ service.service_description }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="service_base_price" class="form-label">Base Price</label>
+                <input type="number" class="form-control" id="service_base_price" name="service_base_price" value="{{ service.service_base_price }}" step="0.01" required>
+            </div>
+            <div class="mb-3">
+                <label for="time_required_for_service" class="form-label">Time Required</label>
+                <input type="text" class="form-control" id="time_required_for_service" name="time_required_for_service" value="{{ service.time_required_for_service }}" required>
+            </div>
+            <button type="submit" class="btn btn-success">Update Service</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

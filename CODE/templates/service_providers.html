@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Service Providers for {{ service_type }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">A to Z helpers</div>
+        <div class="nav-item active">
+          <a href="{{ url_for('index') }}">Home</a>
+        </div>
+        <div class="nav-item">
+          <a href="{{ url_for('View_profile') }}">View Profile</a>
+        </div>
+        <div class="nav-item">
+          <a href="{{ url_for('Services') }}">View Services</a>
+        </div>
+        <div class="nav-item">
+          <a href="{{ url_for('notifications') }}">Notifications</a>
+        </div>
+        <div class="nav-item">
+          <a href="{{ url_for('booked_services') }}">Booked Services</a>
+        </div>
+        <div class="nav-item">
+          <a href="{{ url_for('logout') }}">Log Out</a>
+        </div>
+      </nav>
+  
+  
+    <div class="container my-5">
+        <h2>Service Providers for "{{ service_name }}"</h2>
+        <div class="row">
+           
+            {% for provider in providers %}
+            
+
+            
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>Name</strong>: {{ provider.provider_name }}</h5>
+                            <p class="card-text"><strong>About:</strong> {{ provider.description }}</p>
+                            <p><strong>Experience:</strong> {{ provider.experience }} years</p>
+                            <p><strong>Email:</strong> {{ provider.email_id }}</p>
+                            <p><strong>Phone:</strong> {{ provider.phone_number }}</p>
+                            <p><strong>Pincode:</strong> {{ provider.provider_pincode }}</p>
+
+
+                           
+                           
+                           
+                           
+                           
+                            <form action="{{ url_for('send_request', provider_id=provider.id) }}" method="POST" class="d-inline">
+                                <input type="hidden" name="service_id" value="{{ service_id }}">
+                                <button type="submit" class="btn btn-primary">Send Request</button>
+                            </form>
+        
+                            
+                            {% for request in provider.service_requests_as_provider %}
+                                {% if request.customer_id == current_user.id %}
+                                    {% if request.service_status == 'requested' %}
+                                        <form action="{{ url_for('cancel_request', request_id=request.id) }}" method="POST" class="d-inline">
+                                            <button type="submit" class="btn btn-warning">Cancel Request</button>
+                                        </form>
+                                    {% elif request.service_status == 'completed' %}
+                                        <form action="{{ url_for('close_service', request_id=request.id) }}" method="POST" class="d-inline">
+                                            <button type="submit" class="btn btn-success">Close Service</button>
+                                        </form>
+                                    {% elif request.service_status == 'closed' %}
+                                        {% set review_exists = false %}
+                                        {% for review in reviews %}
+                                            {% if review.request_id == request.id %}
+                                                {% set review_exists = true %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if not review_exists %}
+                                            <form action="{{ url_for('post_review', request_id=request.id) }}" method="POST" class="mt-2">
+                                                <div class="mb-2">
+                                                    <label for="rating" class="form-label">Rating (1-5):</label>
+                                                    <input type="number" name="rating" min="1" max="5" class="form-control" required>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="review_text" class="form-label">Review:</label>
+                                                    <textarea name="review_text" class="form-control" rows="3"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-info">Post Review</button>
+                                            </form>
+                                        {% else %}
+                                            <p>You have already posted a review for this service.</p>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                                
+                            
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                </div>
+                
+        {% endfor %}
+        
+
+
+
+
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f2f5;
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        background-color: #4a90e2;
+        color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-right: 2rem;
+    }
+
+    .nav-item {
+        margin-right: 0rem;
+    }
+
+    .nav-item a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .nav-item:hover a {
+        color: navy;
+        text-shadow: 0 0 8px #1e90ff;
+    }
+
+    /* Service Card Styling */
+    .services-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px auto;
+        max-width: 1200px;
+        gap: 20px;
+    }
+
+    .service-card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-card h3 {
+        font-size: 1.5rem;
+        color: #4a90e2;
+        margin-bottom: 15px;
+    }
+
+    .service-card p {
+        font-size: 1rem;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    .service-card a {
+        text-decoration: none;
+        color: #4a90e2;
+    }
+
+    .service-card a:hover {
+        text-decoration: underline;
+    }
+
+    .btn-book {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+    }
+
+    .btn-book:hover {
+        background-color: #0066cc;
+    }
+</style>

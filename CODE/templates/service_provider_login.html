@@ -1,0 +1,123 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>Welcome</title>
+{% endblock title %}
+
+{% block body %}
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{category}} alert-dismissible fade show flash-message" role="alert">
+  <strong>Message</strong> {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+    
+    
+    
+    
+    
+    
+
+
+<div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
+  <div class="card p-4 shadow" style="width: 400px;">
+    <h1 class="text-center">Login Page</h1>
+
+    <form method="POST" action="/service_provider_login" class="my-5">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control rounded-pill border-0 shadow-sm" id="email" placeholder="Enter email" name="email" aria-label="Email address" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control rounded-pill border-0 shadow-sm" id="password" placeholder="Password" name="password" aria-label="Password" required>
+      </div>
+
+      <div class="forgot-password">
+        <a href="/forgot_password">Forgot Password?</a>
+      </div>
+      <div class="create-account">
+        Don't have an account? <a href="/services_provider_registeration">Create one</a>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary rounded-pill shadow-sm">Log in</button>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <a href="login">Login as a customer?</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+.container-fluid {
+    position: relative; 
+    height: 100vh; 
+}
+
+.card {
+    background-color: #f8f9fa; 
+    border-radius: 15px; 
+    z-index: 1; 
+}
+
+.forgot-password, .create-account {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 15px;
+    color: #555;
+}
+
+.forgot-password a, .create-account a {
+    color: #4A90E2; 
+    text-decoration: none;
+}
+
+.forgot-password a:hover, .create-account a:hover {
+    text-decoration: underline;
+    color: #357ABD; 
+}
+
+.form-control {
+    height: 45px; 
+}
+
+.btn-primary {
+    background-color: #007bff; 
+    border-color: #007bff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 90%;
+    }
+}
+
+body {
+    background-image: url('static/household1.jpeg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+</style>
+
+{% endblock body %}
+

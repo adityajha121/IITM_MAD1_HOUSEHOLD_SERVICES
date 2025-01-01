@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Summary</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Admin Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('view_customers') }}">View Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('view_service_providers') }}">View Service Providers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('approved_providers') }}">Approved Providers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('view_service_provider_requests') }}">Provider Requests</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_service_requests') }}">Service Requests</a>
+                    
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('view_completed_service_requests') }}">Completed Services</a>
+                        </li>
+                    
+                    
+                    
+                    
+                    </li>
+                    
+                    {% for service_request in service_requests %}
+    <p>Service Request ID: {{ service_request.id }}</p>
+    <p>Service: {{ service_request.service.service_name }}</p>
+    <p>Status: {{ service_request.service_status }}</p>
+    <a href="{{ url_for('assign_service_to_professional', request_id=service_request.id) }}" class="btn btn-primary btn-sm">Assign</a>
+{% else %}
+    
+{% endfor %}
+
+                    
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Log Out</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+    <div class="container mt-5">
+        <h2 class="mb-4">Summary</h2>
+
+        <!-- Number of Requests by Date -->
+        <div class="mb-5">
+            <h4>Number of Requests by Date</h4>
+            {% if chart1_path %}
+                <img src="{{ url_for('static', filename='charts/requests_by_date.png') }}" class="img-fluid" alt="Requests by Date">
+            {% else %}
+                <p>No data available for this chart.</p>
+            {% endif %}
+        </div>
+
+        <div class="mb-5">
+            <h4>Requests by Service</h4>
+            {% if chart2_path %}
+                <img src="{{ url_for('static', filename='charts/requests_by_service.png') }}" class="img-fluid" alt="Requests by Service">
+            {% else %}
+                <p>No data available for this chart.</p>
+            {% endif %}
+        </div>
+
+        <div class="mb-5">
+            <h4>Requests by Pincode</h4>
+            {% if chart3_path %}
+                <img src="{{ url_for('static', filename='charts/requests_by_pincode.png') }}" class="img-fluid" alt="Requests by Pincode">
+            {% else %}
+                <p>No data available for this chart.</p>
+            {% endif %}
+        </div>
+
+        <div class="mb-5">
+            <h4>Most Demanded Service</h4>
+            <p>The most demanded service is <strong>{{ most_demanded_service[0] }}</strong> with <strong>{{ most_demanded_service[1] }}</strong> requests.</p>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

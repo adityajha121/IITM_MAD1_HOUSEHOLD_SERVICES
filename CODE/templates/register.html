@@ -1,0 +1,158 @@
+{% extends 'main.html' %}
+
+{% block title %}
+<title>Register</title>
+{% endblock title %}
+
+{% block body %}
+
+<div class="container mt-4">
+    <h3 class="text-center mb-3">Create Your Account</h3>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <form class='my-4' method="POST" action="/register">
+                <div class="row g-2 mb-4">
+                    <div class="col-md-6">
+                        <label for="firstname" class="form-label">First Name</label>
+                        <input type="text" class="form-control form-control-sm" id="firstName" placeholder="First Name" name="first_name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastname" class="form-label">Last Name</label>
+                        <input type="text" class="form-control form-control-sm" id="lastName" placeholder="Last Name" name="last_name" required>
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control form-control-sm" id="email" placeholder="Email" name="email_id" required>
+                </div>
+
+                <div class="row g-2 mb-2">
+                    <div class="col-md-4">
+                        <label for="countryCode" class="form-label">Country Code</label>
+                        <select class="form-select form-select-sm" id="countryCode" name="country_id" required>
+                            <option value="+91">+91 (India)</option>
+                            <option value="+880">+880 (Bangladesh)</option>
+                            <option value="+94">+94 (Sri Lanka)</option>
+                            <option value="+977">+977 (Nepal)</option>
+                            <option value="+960">+960 (Maldives)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="mobile" class="form-label">Mobile Number</label>
+                        <input type="text" class="form-control form-control-sm" id="mobile" placeholder="Mobile Number" name="mobile_NUMBER" required>
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control form-control-sm" id="username" placeholder="Username" name="user_name" required>
+                </div>
+
+                <div class="mb-2">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control form-control-sm" id="password" placeholder="Password" name="customer_password" required>
+                </div>
+
+                <div class="mb-2">
+                    <label for="repeatPassword" class="form-label">Repeat Password</label>
+                    <input type="password" class="form-control form-control-sm" id="repeatPassword" placeholder="Repeat Password" required>
+                </div>
+
+                <div class="mb-2">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control form-control-sm" id="address1" placeholder="Jai Maa Kali" name="customer_address" required>
+                </div>
+
+                <div class="row g-2 mb-2">
+                    <div class="col-md-4">
+                        <label for="pincode" class="form-label">Pincode</label>
+                        <input type="text" class="form-control form-control-sm" id="pincode" placeholder="Pincode" name="customer_pincode" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" class="form-control form-control-sm" id="state" placeholder="State" name="state" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control form-control-sm" id="city" placeholder="City" name="city" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Register</button>
+                
+            </form>
+        </div>
+    </div>
+</div>
+<div class="text-center mb-4">
+    <a href="services_provider_registeration">Register as a service professional?</a>
+</div>
+
+
+{% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

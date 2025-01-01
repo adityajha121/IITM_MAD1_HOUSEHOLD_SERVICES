@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Assign Service Request</title>
+</head>
+<body>
+    <h1>Assign Service Request #{{ service_request.id }}</h1>
+    <p><strong>Service:</strong> {{ service_request.service.service_name }}</p>
+    <p><strong>Customer:</strong> {{ service_request.customer.User_fname }} {{ service_request.customer.User_lname }}</p>
+
+    <form method="POST" action="{{ url_for('assign_service_to_professional', request_id=service_requests.id) }}">
+        <div>
+            <label for="professional_id">Select a Professional:</label>
+            <select id="professional_id" name="professional_id" required>
+                {% for professional in professionals %}
+                <option value="{{ professional.id }}">
+                    {{ professional.provider_name }} (Experience: {{ professional.experience }} years)
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit">Assign</button>
+    </form>
+</body>
+</html>
